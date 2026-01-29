@@ -14,9 +14,60 @@
         margin: 0;
         box-sizing: border-box;
       }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: left;
+        border-bottom: 1px solid black;
+      }
+
+      #clock {
+        font-size: 6rem;
+        text-align: center;
+      }
+
+      /* #clock > p {
+        margin-bottom: -20px;
+      } */
     </style>
   </head>
   <body>
     <h1>Rock around the Clock</h1>
+    <div id="clock">
+      <p id="time"></p>
+      <p id="date"></p>
+    </div>
+    <script>
+      console.log("test");
+
+      setInterval(clockUpdate, 1000);
+
+      function clockUpdate() {
+        // get the Data
+        let d = new Date();
+        let timeData = d.toLocaleTimeString("de-DE");
+        let calenderData = d.toLocaleDateString("de-DE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // set the HTML
+        let time = document.querySelector("#time");
+        let date = document.querySelector("#date");
+
+        time.innerHTML = timeData;
+        date.innerHTML = calenderData;
+      }
+    </script>
   </body>
 </html>
