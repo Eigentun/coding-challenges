@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock Challenge</title>
+    <style>
+      html {
+        font-size: 62.5%;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: left;
+        border-bottom: 1px solid black;
+      }
+
+      h2 {
+        font-size: 4rem;
+        margin-top: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: lighter;
+        transition: color 2s ease;
+      }
+
+      #clock {
+        margin-top: 20px;
+        font-size: 6rem;
+        text-align: center;
+      }
+
+      /* #clock > p {
+        margin-bottom: -20px;
+      } */
+    </style>
+  </head>
+  <body>
+    <h1>Rock around the Clock</h1>
+    <div id="clock">
+      <p id="time"></p>
+      <p id="date"></p>
+    </div>
+    <h2 id="message"></h2>
+    <script>
+      setInterval(clockUpdate, 1000);
+
+      function clockUpdate() {
+        // get the Data
+        let d = new Date();
+        let timeData = d.toLocaleTimeString("de-DE");
+        let hourData = d.getHours();
+        let calenderData = d.toLocaleDateString("de-DE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // set the HTML
+        let time = document.querySelector("#time");
+        let date = document.querySelector("#date");
+        let message = document.querySelector("#message");
+
+        time.innerHTML = timeData;
+        date.innerHTML = calenderData;
+
+        if (hourData >= 6 && hourData < 12) {
+          message.innerHTML = "Good Morning";
+          message.style.color = "orange";
+        } else if (hourData >= 12 && hourData < 20) {
+          message.innerHTML = "Good Afternoon";
+          message.style.color = "rgb(45, 100, 251)";
+        } else if (hourData >= 20 && hourData < 23) {
+          message.innerHTML = "Good Evening";
+          message.style.color = "rgb(9, 19, 110)";
+        } else {
+          message.innerHTML = "Good Night";
+          message.style.color = "black";
+        }
+      }
+    </script>
+  </body>
+</html>
