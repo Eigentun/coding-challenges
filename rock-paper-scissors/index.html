@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      html {
+        font-size: 67.5%;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        font-size: 4rem;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        font-weight: lighter;
+      }
+
+      button {
+        font-size: 10rem;
+      }
+
+      .machine-wrapper {
+        display: flex;
+      }
+
+      p {
+        font-size: 10rem;
+        padding: 5px;
+        background-color: rgb(255, 131, 131);
+        margin: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Will you beat the Machine?</h1>
+    <div class="button-wrapper">
+      <button data-id="rock">🪨</button>
+      <button data-id="paper">🧻</button>
+      <button data-id="scissors">✂️</button>
+    </div>
+    <h1>versus</h1>
+    <div class="machine-wrapper">
+      <p data-id="rock">🪨</p>
+      <p data-id="paper">🧻</p>
+      <p data-id="scissors">✂️</p>
+    </div>
+    <script>
+      let buttons = document.querySelectorAll("button");
+      let machineOptions = ["rock", "paper", "scissors"];
+
+      function pickMachineOption() {
+        let machineOption =
+          machineOptions[Math.floor(Math.random() * machineOptions.length)];
+
+        return machineOption;
+      }
+
+      buttons.forEach((button) =>
+        button.addEventListener("click", () => {
+          console.log(button.dataset.id);
+          console.log(pickMachineOption());
+        }),
+      );
+    </script>
+  </body>
+</html>
