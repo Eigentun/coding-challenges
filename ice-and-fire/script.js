@@ -8,18 +8,22 @@ const getData = async () => {
         }
         const data = await response.json();
         const characters = data.povCharacters;
-        for (const c of characters) {
-            const characterFetch = await fetch(c);
-            const characterData = await characterFetch.json();
-            console.log(characterData.name);
-            console.log(characterData.gender);
-            const characterCulture = characterData.culture === ""
-                ? "Empty"
-                : characterData.culture;
-            console.log(characterCulture);
-            const deathStatus = characterData.died === "" ? "Alive" : "Dead";
-            console.log(deathStatus);
-        }
+        const promises = await Promise.all(characters.map(async (url) => {
+            const resp = await fetch(url);
+            const respData = await resp.json();
+            return respData;
+        }));
+        console.log(promises);
+        // for (const c of characters) {
+        //     const characterFetch = await fetch(c);
+        //     const characterData = await characterFetch.json();
+        //     console.log(characterData.name);
+        //     console.log(characterData.gender);
+        //     const characterCulture = characterData.culture === "" ? "Empty" : characterData.culture;
+        //     console.log(characterCulture);
+        //     const deathStatus = characterData.died === "" ? "Alive" : "Dead";
+        //     console.log(deathStatus);
+        // }
     } catch (error) {
         console.error(error);
     }
