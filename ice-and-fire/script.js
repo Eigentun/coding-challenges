@@ -12,14 +12,14 @@ const getData = async () => {
         }
         const data = await response.json();
         const characters = data.povCharacters;
-        const promises = await Promise.all(characters.map(async (url) => {
+        const promise = await Promise.all(characters.map(async (url) => {
             const resp = await fetch(url);
             const respData = await resp.json();
             const names = await respData.name;
             return names;
         }));
 
-        for (const el of promises) {
+        for (const el of promise) {
             fs.writeFile(`character-${el}.txt`, el, fileWritten);
         }
         //const namesList = promises.join("\n");
